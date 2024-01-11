@@ -58,7 +58,7 @@ public class Main {
                         // System.out.println(candidate.getParty()+"..."+candidate2.getParty()+"..."+l +"..."+j+"..."+size(candidates));
             
                         if ((candidate.getParty().equals(candidate2.getParty())) && (l<j)) {
-                            System.out.println("bhygvygvtfyvtfygvyfg");
+                            // System.out.println("bhygvygvtfyvtfygvyfg");
                             while (k<size(candidates)-1) {
                                 candidates[k] = candidates[k+1];
                                 k++;
@@ -114,11 +114,14 @@ public class Main {
             
             
             if (choice == 1){
-                System.out.println("Welcome Mr/Mrs admin:");
+                if(voter[0] == null) System.out.println("Welcome Mr/Mrs admin ");
+                else System.out.println("Welcome back Mr/Mrs admin ");
                 for (int i = 0; i < 3; i++) {
                     System.out.println("Please enter password: ");
-                    if (lire.nextLine() == votingSystem.getPassword()) {
+                    String pass = lire.nextLine();
+                    if (pass.equals(votingSystem.getPassword())) {
                         admin = true;
+                        i = 3;
                     }
                     else System.out.println("Sorry wrong Password");
                 }
@@ -127,8 +130,14 @@ public class Main {
             else if (choice == 0) on = false;
 
             while (admin) {
-                System.out.println("1. Launch voting session");
-                System.out.println("2. Paste results");
+                if(voter[0] == null){
+                    System.out.println("1. Launch voting session");
+                    System.out.println("2. Paste results");
+                }
+                else{
+                    System.out.println("1. Continue voting session");
+                    System.out.println("2. Paste results");
+                }
                 choice = lire.nextInt();
                 admin = false;
                 switch (choice) {
@@ -137,8 +146,9 @@ public class Main {
                         break;
                     case 2:
                         choice = 0;
+                        break;
                     default:
-                        System.out.println("Imvalid input!!");
+                        System.out.println("Invalid input!!");
                         admin = true;
                         break;
                 }
@@ -157,6 +167,7 @@ public class Main {
                 System.out.println("Or Enter 0 to quit system: ");
                 vote = read.nextInt();
                 if(vote == 0){
+                    choice = 1;
                     user = false;
                 }
                 else if(vote > size(candidates) || vote < 0){
