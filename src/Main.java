@@ -105,6 +105,7 @@ public class Main {
         int choice = 1;
         boolean user = false;
         boolean admin = false;
+        boolean results = false;
         while (on) {
             int vote;
             String name;
@@ -114,9 +115,11 @@ public class Main {
             
             
             if (choice == 1){
+                System.out.println();
                 if(voter[0] == null) System.out.println("Welcome Mr/Mrs admin ");
                 else System.out.println("Welcome back Mr/Mrs admin ");
                 for (int i = 0; i < 3; i++) {
+                    System.out.println();
                     System.out.println("Please enter password: ");
                     String pass = lire.nextLine();
                     if (pass.equals(votingSystem.getPassword())) {
@@ -127,9 +130,11 @@ public class Main {
                 }
             }
             else if (choice == 2) user = true;
-            else if (choice == 0) on = false;
+            else if (choice == 0) results = true;
+            else if (choice == 3) on = false;
 
             while (admin) {
+                System.out.println();
                 if(voter[0] == null){
                     System.out.println("1. Launch voting session");
                     System.out.println("2. Paste results");
@@ -156,10 +161,11 @@ public class Main {
             }
             
             while (user) {
-                voterNum++;
                 Scanner read = new Scanner(System.in);
+                System.out.println();
                 System.out.println("Enter your name: ");
                 name = read.nextLine();
+                System.out.println();
                 System.out.println("Pick a candidate by number: ");
                 for (int i = 0; i < size(candidates); i++) {
                     System.out.println((i+1)+" "+candidates[i].getName()+" of "+candidates[i].getParty());
@@ -174,6 +180,7 @@ public class Main {
                     System.out.println("Number not in range!!!");
                 }
                 else{   
+                    voterNum++;
                     voter[voterNum] = new Voter(name);
                     votingSystem.addVoter(voter[voterNum]);
                     votingSystem.vote(candidates[vote-1], voter[voterNum]);
@@ -198,10 +205,19 @@ public class Main {
                 // votingSystem.vote(candidates[3], voter5);
                 // votingSystem.vote(candidates[2], voter3); // Invalid vote because voter2 has already voted
             }
+            if (results) {
+                System.out.println();
+                // System.out.println("Candi "+ size(candidates));
+                choice = votingSystem.displayResults();
+                if (choice == 2) {
+                    candidates = getcandi();
+                    for (Candidate candidate : candidates) {
+                        votingSystem.addCandidate(candidate);
+                    }
+                }
+                results = false;
+            }
         }
 
-        System.out.println();
-        // System.out.println("Candi "+ size(candidates));
-        votingSystem.displayResults();
     }
 }
