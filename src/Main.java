@@ -171,8 +171,8 @@ public class Main {
                 code = read.nextLine();
                 for (Voter vot : voter) {
                     if(vot != null){
-                        System.out.println(vot.getCode());
-                        System.out.println(code);
+                        // System.out.println(vot.getCode());
+                        // System.out.println(code);
                         if(vot.getCode().equals(code)){
                             conti = false;
                             break;
@@ -217,6 +217,16 @@ public class Main {
                     for (Candidate candidate : candidates) {
                         votingSystem.addCandidate(candidate);
                     }
+                    for (Voter vot : voter) {
+                        if(vot != null){
+                            // System.out.println(vot.getCode());
+                            // System.out.println(code);
+                            vot.setCode("0");
+                        }
+                        else break;
+                    }
+                    // votingSystem = null;
+                    // voter.cl
                 }
                 results = false;
             }

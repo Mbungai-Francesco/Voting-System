@@ -100,6 +100,9 @@ class VotingSystem {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            candidates.clear();
+            voters.clear();
+            voteCount.clear();
             return 2;
         }
     }

@@ -19,8 +19,12 @@ def add():
 
 def search():
     global n
-    val = text_box1.get()
-    element = hash(val)
+    if n==1:
+        val = text_box1.get()
+        element = hash(val)
+    else:
+        val = text_box.get()
+        element = hash(val)
 
     # for key, value in hash_table.items():
     if element in hash_table.keys():
