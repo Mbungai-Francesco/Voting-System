@@ -106,9 +106,11 @@ public class Main {
         boolean user = false;
         boolean admin = false;
         boolean results = false;
+        boolean conti = true;
         while (on) {
             int vote;
             String name;
+            String code;
             // System.out.println("1. Admin:");
             // System.out.println("2. Voter:");
             // System.out.println("0. To quit:");
@@ -165,45 +167,46 @@ public class Main {
                 System.out.println();
                 System.out.println("Enter your name: ");
                 name = read.nextLine();
-                System.out.println();
-                System.out.println("Pick a candidate by number: ");
-                for (int i = 0; i < size(candidates); i++) {
-                    System.out.println((i+1)+" "+candidates[i].getName()+" of "+candidates[i].getParty());
+                System.out.println("Enter your id Number: ");
+                code = read.nextLine();
+                for (Voter vot : voter) {
+                    if(vot != null){
+                        System.out.println(vot.getCode());
+                        System.out.println(code);
+                        if(vot.getCode().equals(code)){
+                            conti = false;
+                            break;
+                        }else conti = true;
+                    }
+                    else break;
                 }
-                System.out.println("Or Enter 0 to quit system: ");
-                vote = read.nextInt();
-                if(vote == 0){
-                    choice = 1;
-                    user = false;
+                if (conti) {
+                    System.out.println();
+                    System.out.println("Pick a candidate by number: ");
+                    for (int i = 0; i < size(candidates); i++) {
+                        System.out.println((i+1)+" "+candidates[i].getName()+" of "+candidates[i].getParty());
+                    }
+                    System.out.println("Or Enter 0 to quit system: ");
+                    vote = read.nextInt();
+                    if(vote == 0){
+                        choice = 1;
+                        user = false;
+                    }
+                    else if(vote > size(candidates) || vote < 0){
+                        System.out.println("Number not in range!!!");
+                    }
+                    else{   
+                        voterNum++;
+                        voter[voterNum] = new Voter(name,code);
+                        votingSystem.addVoter(voter[voterNum]);
+                        votingSystem.vote(candidates[vote-1], voter[voterNum]);
+                    }
                 }
-                else if(vote > size(candidates) || vote < 0){
-                    System.out.println("Number not in range!!!");
+                else{
+                    System.out.println();
+                    System.err.println("Sorry can't change vote or vote twice!!");
                 }
-                else{   
-                    voterNum++;
-                    voter[voterNum] = new Voter(name);
-                    votingSystem.addVoter(voter[voterNum]);
-                    votingSystem.vote(candidates[vote-1], voter[voterNum]);
-                }
-                // read.next();
-                // read.close();
-                // Voter voter1 = new Voter("Alice");
-                // Voter voter2 = new Voter("Bob");
-                // Voter voter3 = new Voter("Lime");
-                // Voter voter4 = new Voter("Orange");
-                // Voter voter5 = new Voter("Plum");
-
-                // votingSystem.addVoter(voter1);
-                // votingSystem.addVoter(voter2);
-                // votingSystem.addVoter(voter3);
-                // votingSystem.addVoter(voter4);
-                // votingSystem.addVoter(voter5);
-
-                // votingSystem.vote(candidates[0], voter1);
-                // votingSystem.vote(candidates[1], voter2);
-                // votingSystem.vote(candidates[2], voter4);
-                // votingSystem.vote(candidates[3], voter5);
-                // votingSystem.vote(candidates[2], voter3); // Invalid vote because voter2 has already voted
+                
             }
             if (results) {
                 System.out.println();

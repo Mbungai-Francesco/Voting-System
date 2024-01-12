@@ -1,0 +1,9 @@
+1. My voting system focuses on digitizing the act of voting, ensuring more security, no bias in the counting of the votes taking the counting of such big data from the hands of humans.
+2.I coded the whole system in Java. Using array-list and hashMaps.
+With the followinf classes, Candidate, Voter, VotingSystem and a main to link the whole system and make it work.
+3.The system is of two users, the admin and the voters, the admin can launch the voting session, or decide to post the results, the voters just get to enter their names and place a vote or quit the system.
+If the results feature a draw, then those candidates with equal maximum votes are sorted out and a vote is launched again.
+4.The user needs to enter a password to get access to the system in other to launch the vote, give access to continue the votes or to paste the results.
+5.All the candidates and their various parties are stored in a file, which is read at the beggining of the program and all the cases of duplicate parties are removed.
+For user authentication each user has a user id, and if a voter is not allowed to vote twice.
+6.No userinterface was used, the system runs on the command line
